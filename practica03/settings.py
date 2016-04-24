@@ -24,13 +24,20 @@ SECRET_KEY = '2^er7pcoj9z+bo&lcha0q-zhij#_2y!mb5n5uu43#vmnz=gx$q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#SITE_ID = 1
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = '/accounts/logout/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djandoApp.apps.DjandoappConfig',
+    #app  para django-allauth
+    #'allauth'
+    #'allauth.account'
+    #'allauth,socialaccount'
+    'accounts'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -69,6 +81,22 @@ TEMPLATES = [
     },
 ]
 
+
+#TEMPLATE_CONTEXT_PROCESSORS = (
+    # Django default context processors
+ #   "django.contrib.auth.context_processors.auth",
+  #  "django.core.context_processors.debug",
+   # "django.core.context_processors.i18n",
+    #"django.core.context_processors.media",
+    #"django.core.context_processors.static",
+    #"django.core.context_processors.tz",
+    #"django.contrib.messages.context_processors.messages",
+    # Required by allauth template tags
+   # "django.core.context_processors.request",
+    # allauth specific context processors
+  #  "allauth.account.context_processors.account",
+ #   "allauth.socialaccount.context_processors.socialaccount",
+#)
 WSGI_APPLICATION = 'practica03.wsgi.application'
 
 
@@ -105,7 +133,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+ #   "django.contrib.auth.backends.ModelBackend",
 
+    # `allauth` specific authentication methods, such as login by e-mail
+  #  "allauth.account.auth_backends.AuthenticationBackend",
+#)
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 

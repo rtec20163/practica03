@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
 	url(r'',views.consultar_grupos, name='grupos'),
+	
 ]

@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from .models import Grupo_artista
-from .models import Genero
-from django.template import loader
-from django.http import HttpResponse
+from django.shortcuts import render_to_response, redirect, render
+from django.template import RequestContext, loader, Context, Template
+from .models import *
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse 
+from django.contrib.auth import authenticate, login, logout
+from django.http import *
 
 
 def consultar_grupos(request):
@@ -13,3 +15,4 @@ def consultar_grupos(request):
 		'contenido':contenido,
 	}
 	return HttpResponse(plantilla.render(contexto,request))
+
