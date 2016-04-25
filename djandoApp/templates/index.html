@@ -7,7 +7,7 @@
 
 	<ul>
 		{% for q in contenido %}
-		<li>{{q.nombre}} - Genero:
+		<li> <a href ="{% url 'djandoApp.views.detalle_grupo' pk=q.pk %}">{{q.nombre}}</a>  - Genero:
 			{% for g in q.genero.all%}
 			{{g.nombre}}
 			{%endfor%}

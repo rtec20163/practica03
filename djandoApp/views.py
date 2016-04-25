@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Grupo_artista
 from .models import Genero
 from django.template import loader
@@ -12,4 +12,12 @@ def consultar_grupos(request):
 	contexto = {
 		'contenido':contenido,
 	}
+	return HttpResponse(plantilla.render(contexto,request))
+
+def detalle_grupo(request, pk):
+	grupo = Grupo_artista.objects.get(id=pk)
+	plantilla = loader.get_template("detalle_grupo.html")
+	contexto = {
+		'grupo':grupo,
+	}	
 	return HttpResponse(plantilla.render(contexto,request))
