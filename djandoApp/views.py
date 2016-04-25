@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Grupo_artista
-from .models import Genero
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import *
 from django.template import loader
 from django.http import HttpResponse
+from .forms import UsuarioForm
 
 
 def consultar_grupos(request):
@@ -14,10 +14,21 @@ def consultar_grupos(request):
 	}
 	return HttpResponse(plantilla.render(contexto,request))
 
-def detalle_grupo(request, pk):
-	grupo = Grupo_artista.objects.get(id=pk)
+def detalle_grupo(request,pk):
+	grupo = get_object_or_404(Grupo_artista,id=pk)
 	plantilla = loader.get_template("detalle_grupo.html")
 	contexto = {
 		'grupo':grupo,
 	}	
 	return HttpResponse(plantilla.render(contexto,request))
+
+def registro(request):
+	if request.method =="POST":
+		form = UsuarioForm(request.POST)
+		if form.is_valid():
+			usuario=form.save(commit=False)
+			usuario.save()
+			return consultar_grupos(request)
+	else:
+		form = UsuarioForm()
+	return render(request,'registro.html',{'form':form})
