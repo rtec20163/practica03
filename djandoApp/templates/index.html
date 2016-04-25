@@ -1,0 +1,29 @@
+<a href="{% url 'djandoApp.views.registro' %}"> Registrarse</a>
+<a href="{% url 'djandoApp.views.login' %}"> login</a>
+
+
+<h1>Bienvenido</h1>
+<div style="width:100%">
+
+	<div style="width:70%;float:left;">
+		<h2>Grupos Registrados</h2>
+		{% if contenido %}
+
+	<ul>
+		{% for q in contenido %}
+		<li> <a href ="{% url 'djandoApp.views.detalle_grupo' pk=q.pk %}">{{q.nombre}}</a>  - Genero:
+			{% for g in q.genero.all%}
+			{{g.nombre}}
+			{%endfor%}
+		</li>
+		{% endfor %}		
+	</ul>
+	{% else %}
+	<p>Aun no hay registros de grupos</p>
+	{% endif %}
+	</div>
+
+	<div style="float:left;">
+		<h2>Ultimos Posts</h2>	
+	</div>
+</div>
