@@ -1,5 +1,16 @@
-
+{% load staticfiles %}
+<html>
+	<head>
+		<link href='//fonts.googleapis.com/css?family=Lobster&subset=latin.latin-ext' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+	</head>	
+<body>	
 	<div>
 	<h1>{{ grupo.nombre }}</h1>
 	<h6>{{ grupo.fecha_inicio }}</h6>
 	<h2>{{ grupo.integrantes }}</h2>
+	</div>
+
+	<a href="{% url 'djandoApp.views.publicacion_nueva' %}" class= "top-menu"><span class='glyphicon glyphicon-plus'></span> </a>
+</body>	
+</html>	

@@ -1,10 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django.template import loader
-from django.http import *
+from django.http import HttpResponse
 from .forms import UsuarioForm
-from django.contrib import *
-
 
 
 def consultar_grupos(request):
@@ -35,32 +33,24 @@ def registro(request):
 		form = UsuarioForm()
 	return render(request,'registro.html',{'form':form})
 
-def login(request):
-		username = request.POST.get('username','Hola')
-		password = request.POST.get('password','inseguro')
-		user = auth.authenticate(username=username, password=password)
-		form = UsuarioForm(request.POST)
+def registro_grupo(request):
+	if request.method =="POST":
+		form = GrupoForm(request.POST)
+		if form.is_valid():
+			grupo=form.save(commit=False)
+			grupo.save()
+			return consultar_grupos(request)
+	else:
+		form = GrupoForm()
+	return render(request,'registrogrupo.html',{'form':form})
 
-		if user is not None and user.is_activate:
-			auth.login(request, user)
+	def publicacion(request):
+		posts = publicacion.objects.all()
+		return render(request, 'djandoApp/index.html', {'posts' : posts})
 
-			return render(request,'index.html',{'form':form})
-
-		else:
-			return render(request,'login.html',{'form':form})
-
-def logout(request):
-	auth.logout(request)
-
-	return render(request,'index.html')
-
-
-
-
-
-
-
-
+def publicacion_nueva(request):
+	form = PostForm()
+	return render(request, 'djandoApp/publicacion_edit.html', {'form' : form})
 
 
 

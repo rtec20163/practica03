@@ -1,7 +1,6 @@
 # practica03
 
-rama de desarrollo de edgar
-
+rama de desarrollo de omar.
 
 
 
