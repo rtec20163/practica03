@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django.template import loader
 from django.http import *
-from .forms import UsuarioForm
+from .forms import UsuarioForm, PublicacionForm
 from django.contrib import *
 
 
@@ -15,7 +15,6 @@ def consultar_grupos(request):
 		'public':public,
 	}
 	return HttpResponse(plantilla.render(contexto,request))
-
 
 ###
 def detalle_public(request,pk):
@@ -31,15 +30,27 @@ def detalle_public(request,pk):
 
 def detalle_grupo(request,pk):
 	grupo = get_object_or_404(Grupo_artista,id=pk)
-	public = publicacion.objects.filter(grupo=pk)#publicacion.objects.get(grupo = grupo.nombre)
-	#ob_list = publicacion.objects.filter(Q(name__contains=word))
+	public = publicacion.objects.filter(grupo=pk)
 	plantilla = loader.get_template("detalle_grupo.html")
 	contexto = {
 		'grupo':grupo,
 		'public':public,
 	}	
 	return HttpResponse(plantilla.render(contexto,request))
+####
+def comentar(request):
+	if request.method =="POST":
+		formUNO = PublicacionForm(request.POST)
+		if formUNO.is_valid():
+			publicacion=formUNO.save(commit=False)
+			publicacion.save()
 
+			return redirect('http://127.0.0.1:8000/')
+	else:
+		formUNO = PublicacionForm()
+	return render(request,'comentar.html',{'formUNO':formUNO})
+
+####
 def registro(request):
 	if request.method =="POST":
 		form = UsuarioForm(request.POST)

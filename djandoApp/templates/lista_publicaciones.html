@@ -1,0 +1,18 @@
+	<h2>Ultimos Posts</h2>	
+	{% if public %}
+
+	<ul>
+		{% for q in public %}
+		<li> 
+		<h4>{{q.grupo}}</h4>
+		<a href ="{% url 'djandoApp.views.detalle_public' pk=q.pk %}">{{q.titulo}}</a>
+
+		<h5>{{q.texto}}</h5>
+		</li>
+		<hr/>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>Aun no hay publicaciones de grupos</p>
+	{% endif %}
+
