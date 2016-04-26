@@ -1,12 +1,11 @@
-from django.shortcuts import render
-from .models import Grupo_artista
-from .models import Genero
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import *
 from django.template import loader
-from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
+from django.http import *
+from .forms import UsuarioForm
+from django.contrib import *
+from django.contrib.auth import *
+
 
 
 def consultar_grupos(request):
@@ -18,44 +17,104 @@ def consultar_grupos(request):
 	}
 	return HttpResponse(plantilla.render(contexto,request))
 
+def detalle_grupo(request,pk):
+	grupo = get_object_or_404(Grupo_artista,id=pk)
+	plantilla = loader.get_template("detalle_grupo.html")
+	contexto = {
+		'grupo':grupo,
+	}	
+	return HttpResponse(plantilla.render(contexto,request))
 
-def nuevo_usuario(request):
-	if request.method=='POST':
-		formulario = UserCreationForm(request.POST)
-		if formulario.is_valid:
-			formulario.save()
-			return HttpResponseRedirect('index')
+def registro(request):
+	if request.method =="POST":
+		form = UsuarioForm(request.POST)
+		if form.is_valid():
+			usuario=form.save(commit=False)
+			usuario.save()
+			return consultar_grupos(request)
 	else:
-		formulario = UserCreationForm()
-	return render_to_respose('nuevo_usuario.html',{'formulario':formulario},contex_instance=RequestContext(request))
+		form = UsuarioForm()
+	return render(request,'registro.html',{'form':form})
 
-@login_required(login_url='/ingresar')
-def privado(request):
-	usuario=request.user
-	return render_to_response('privado.html', {'usuario':usuario}, contex_instance=RequestContext(request))
+from django.core.urlresolvers import reverse
+def auth_view(request):
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username = username, password = password)      
 
-@login_required(login_url='/ingresar')
-def cerrar(request):
-	logout(request)
-	return HttpResponseRedirect('/')
+    if user is not None:
+        auth.login(request, user)
+        return HttpResponseRedirect(reverse('home'))
+    else:
+        return HttpResponseRedirect('/accounts/invalid')
+
+def logiin(request):
+		username = request.POST.get('username','')
+		password = request.POST.get('password','')
+		user = auth.authenticate(username=username, password=password)
+		
+
+		if user is not None:
+			auth.login(request, user)
+			return HttpResponseRedirect('/')
+
+		else:
+			return HttpResponseRedirect('/logiin.html')
+
+def logout(request):
+	auth.logout(request)
+
+	return render(request,'index.html')
 
 
-def  ingresar(request):
-	if request.method=='POST':
+def ingresar(request):
+	if request.method =='POST':
 		formulario = UserCreationForm(request.POST)
 		if formulario.is_valid:
 			usuario = request.POST['username']
 			clave = request.POST['password']
 			acceso = authenticate(username=usuario,password=clave)
-			if acceso.is_active:
-				login(request,acceso)
-				return HttpResponseRedirect('/privado')
-			else:
-				return render_to_response('noactivo.html', contex_instance=RequestContext(request))
-		else:
-			return render_to_response('nousuario.html', contex_instance=RequestContext(request))
+			if acceso is not None:
+				if acceso.is_active:
+					login(request,acceso)
+					return HttpResponseRedirect(request,'index.html')
+				else:
+					return render_to_response('index.html', contex_instance = RequestContext(request))
 	else:
-		formulario = AuthenticationForm()
-	return render_to_response('ingresa.html', {'formulario':formulario}, contex_instance=RequestContext(request))
+		formulario = AuthenticationForm() ## error
+	return render_to_response('index.html',{'formulario':formulario},contex_instance=RequestContext(request))
+				
+def loogin(request):
+	if request.method =='POST':
+		formulario = LoginForm(request.POST)
+		if formulario.is_valid():
+			username=form.cleaned_data['username']
+			password=form.cleaned_data['password']
+			acceso = authenticate(username=usuario,password=clave)
+			if acceso is not None:
+				login(request,acceso)
+				return HttpResponseRedirect('index')
+			else:
+				return render_to_response('loogin.html',{'form':form},contex_instance=RequestContext(request))
+		else:
+			return render_to_response('loogin.html',{'form':form},contex_instance=RequestContext(request))
+	else:
+		form = LoginForm()## aqui error 
+		contexto = {'form':form}
+		return render_to_response('loogin.html',contexto,contex_instance=RequestContext(request))
 
-			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

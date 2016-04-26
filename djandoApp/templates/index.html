@@ -1,15 +1,18 @@
-	<h1>Bienvenido</h1>
+<a href="{% url 'djandoApp.views.registro' %}"> Registrarse</a>
+<a href="{% url 'djandoApp.views.logiin' %}"> logiin</a>
+<a href="{% url 'djandoApp.views.ingresar' %}">ingresar</a>
+<a href="{% url 'djandoApp.views.loogin' %}"> loogin</a>
+
+<h1>Bienvenido</h1>
 <div style="width:100%">
-	<a href="nuevousuario.html">registrar</a>
-	<a href="ingresar.html">login</a>
-	<a href=""></a>
+
 	<div style="width:70%;float:left;">
 		<h2>Grupos Registrados</h2>
 		{% if contenido %}
 
 	<ul>
 		{% for q in contenido %}
-		<li>{{q.nombre}} - Genero:
+		<li> <a href ="{% url 'djandoApp.views.detalle_grupo' pk=q.pk %}">{{q.nombre}}</a>  - Genero:
 			{% for g in q.genero.all%}
 			{{g.nombre}}
 			{%endfor%}
@@ -25,3 +28,4 @@
 		<h2>Ultimos Posts</h2>	
 	</div>
 </div>
+
