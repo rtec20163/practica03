@@ -1,18 +1,75 @@
-	<h1>Bienvenido</h1>
+<DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+	 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	 <style type="text/css">
+	 	 h1{
+	 color: #FCA205;
+        font-family: 'Lobster';
+        font-size:36pt;
+	 }
+	 h4{
+
+	 	font-family: 'Lobster';
+	 	font-size:22pt;
+	 }
+	 h5{
+	 	font-family: 'Lobster';
+	 	font-size:16pt;
+	 }
+	 div{
+	 	width: 300px
+	 	heigth:250px;
+	 	margin: auto;
+	 	
+	 }
+	 h2{
+	 	font-family: 'Lobster';
+	 	color: #FF0000;
+
+	 }
+	 #us{
+	 	text-align: center;
+	 	width: 60px;
+	 	height: 50px
+	 	margin: auto;
+	 }
+	 </style>
+</head>
+<body>
+<a href="{% url 'djandoApp.views.registro' %}"> Registrarse</a>
+<a href="{% url 'djandoApp.views.login' %}"> login</a>
+<a href="{% url 'djandoApp.views.logout' %}"> salir</a>
+
+<a href="{% url 'djandoApp.views.registro_grupo' %}"> Registrar grupo o artista</a>
+<a href="{% url 'djandoApp.views.registro_genero' %}"> Registrar genero</a>
+
+<hr/>
+<h1>Bienvenido</h1>
 <div style="width:100%">
 
-	<div style="width:70%;float:left;">
+	<div style="width:70%;float:left;" style=" color: #FF0000;">
 		<h2>Grupos Registrados</h2>
-		{% if contenido %}
+
+	{% if contenido %}
 
 	<ul>
 		{% for q in contenido %}
-		<li>{{q.nombre}} - Genero:
+		<li>
+		<h4>
+		<a href ="{% url 'djandoApp.views.detalle_grupo' 
+		pk=q.pk %}">{{q.nombre}}</a>
+		</h4>
+		<h4>Genero:</h4>
+			<h1>
 			{% for g in q.genero.all%}
 			{{g.nombre}}
 			{%endfor%}
+			</h1>
 		</li>
-		{% endfor %}		
+		<hr/>
+		{% endfor %}
 	</ul>
 	{% else %}
 	<p>Aun no hay registros de grupos</p>
@@ -20,6 +77,56 @@
 	</div>
 
 	<div style="float:left;">
-		<h2>Ultimos Posts</h2>	
+
+	<h2>Ultimos Posts</h2>	
+	{% if public %}
+
+	<ul>
+		{% for q in public %}
+		<li> 
+		<h4>{{q.grupo}}</h4>
+		<h4>
+		<a href ="{% url 'djandoApp.views.detalle_public' pk=q.pk %}">{{q.titulo}}</a>
+		</h4>
+		<h5>{{q.texto}}</h5>
+		</li>
+		<hr/>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>Aun no hay publicaciones de grupos</p>
+	{% endif %}
 	</div>
 </div>
+
+</body>
+</html>
+
+
+<!--
+<h1>Bienvenido</h1>
+<div style="width:100%">
+
+	<div style="width:70%;float:left;">
+		<h2>Grupos Registrados 2</h2>
+	{% if contenido %}
+
+	<ul>
+		{% for q in contenido %}
+		<li> 
+		<a href ="{% url 'djandoApp.views.detalle_public' pk=q.pk %}">{{q.titulo}}</a>
+
+		<h4>comentario:</h4>
+			{{q.texto}}
+		</li>
+		<br/>
+		<hr/>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>Aun no hay registros de grupos</p>
+	{% endif %}
+	</div>
+<hr/>
+</div>
+-->

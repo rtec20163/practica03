@@ -1,0 +1,88 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+	 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	 <style type="text/css">
+	 h2{
+	 color: #FCA205;
+        font-family: 'Lobster';
+        font-size:36pt;
+	 }
+	 h4{
+
+	 	font-family: 'Lobster';
+	 	font-size:22pt;
+	 }
+	 h6{
+	 	font-family: 'Lobster';
+	 	font-size:16pt;
+	 }
+	 p{
+	 	font-family: 'Lobster';
+	 	font-size:16pt;
+	 	
+	 }
+	 </style>
+</head>
+<body>
+
+
+<a href="{% url 'djandoApp.views.consultar_grupos' %}"> --GRUPOS</a>
+<hr/>
+<h2 align="center">Datos de "{{ grupo.nombre }}"</h2>
+
+<h4>INTEGRANTES:</h4>
+<p>{{ grupo.integrantes }}</p>
+
+<h4>FECHA DE INICIO: </h4>
+<p>{{ grupo.fecha_inicio }}</p>
+
+<h4>GENERO:</h4>
+<p>
+	{% for g in grupo.genero.all%}
+		{{g.nombre}}
+	{%endfor%}
+</p>
+<hr/>
+<!---->
+<!---->
+
+<a href="{% url 'djandoApp.views.comentar'%}"> Agregar comentario a {{grupo.nombre}}</a>
+<div>
+
+<!---->
+<hr/>
+<h2 align="center">COMENTARIOS PARA EL GRUPO O ARTISTA</h2>
+
+	{% if public %}
+
+	<ul>
+		{% for q in public %}
+
+			<h3>{{ q.grupo }}</h3>
+
+			<p><h6>TITULO:</h6> {{ q.titulo }}</p>
+
+			<p><h6>COMENTARIO:</h6> {{ q.texto }}</p>
+
+			<h6>AUTOR:</h6> <p>{{ q.autor }}</p>
+
+
+		<hr/>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>Aun no hay publicaciones de grupos</p>
+	{% endif %}
+
+<p></p>
+
+
+
+
+<p></p>
+
+</body>
+</html>

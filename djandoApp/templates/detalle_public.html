@@ -1,0 +1,63 @@
+
+<DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+	 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	 <style type="text/css">
+	 	 h1{
+	 color: #FCA205;
+        font-family: 'Lobster';
+        font-size:36pt;
+	 }
+	 h4{
+	 	color: #FCA205;
+	 	font-family: 'Lobster';
+	 	font-size:26pt;
+	 }
+	 h5{
+	 	font-family: 'Lobster';
+	 	font-size:16pt;
+	 }
+	 div{
+	 	width: 300px
+	 	heigth:250px;
+	 	margin: auto;
+	 	
+	 }
+	 h2{
+	 	font-family: 'Lobster';
+	 	color: #FF0000;
+
+	 }
+	 #us{
+	 	text-align: center;
+	 	width: 60px;
+	 	height: 50px
+	 	margin: auto;
+	 }
+	 </style>
+</head>
+<body>
+
+
+<a href="{% url 'djandoApp.views.consultar_grupos' %}"> --GRUPOS</a>
+
+<hr/>
+	<h4>GRUPO O ARTISTA QUE PERTENECE EL COMENTARIO</h4>
+	<h5><p>{{ public.grupo }}</p></h5>
+
+	<h4>TITULO: </h4>
+	<h5><p>{{ public.titulo }}</p></h5>
+
+	<h4>COMENTARIO: </h4>
+	<h5><p>{{ public.texto }}</p></h5>
+
+	<h4>AUTOR: </h4>	
+	<h5><p>{{ public.autor }}</p>	</h5>
+
+
+
+
+</body>
+</html>

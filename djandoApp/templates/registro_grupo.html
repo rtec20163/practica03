@@ -1,0 +1,85 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+	 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	 <style type="text/css">
+	 	 h1{
+	 color: #FCA205;
+        font-family: 'Lobster';
+        font-size:36pt;
+	 }
+	 h3{
+	 	color: #FCA205;
+	 	font-family: 'Lobster';
+	 	font-size:40pt;
+	 	text-align: center;
+	 }
+	 h6{
+	 	font-family: 'Lobster';
+	 	font-size:16pt;
+	 }
+	 div{
+	 	width: 300px
+	 	heigth:250px;
+	 	margin: auto;
+	 	
+	 }
+	 #us{
+	 	text-align: center;
+	 	width: 200px;
+	 	height: 50px
+	 	margin: auto;
+	 }
+	 </style>
+</head>
+<body>
+{% load staticfiles%}
+
+<div id="us" style="">
+<h3>Registro de grupo</h3>
+<form method="POST">
+	{% csrf_token %}
+
+	{{form.as_p}}
+
+	<input type="submit" value="Registrar" class="btn btn-primary"/>
+
+<!---->
+
+
+<button id="opener" class="btn btn-primary">Agregar genero</button>
+</form>
+<div id="dialog"{{ row.sku }} title="Nuevo Comentario">
+
+<form method="POST">
+	{% csrf_token %}
+
+	{{formUNO.as_p}}
+
+	<input type="submit" value="Comentar" class="btn btn-primary"/>
+</from>
+
+</div>
+</div>
+
+
+<script>
+	$( "#dialog"{{ row.sku }} ).dialog({ autoOpen: false
+	});
+	$( "#opener" ).click(function() {
+	$( "#dialog"{{ row.sku }} ).dialog( "open" );
+	});
+</script>
+<!---->
+
+
+</from>
+</body>
+</html>
+
+
+
