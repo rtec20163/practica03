@@ -1,8 +1,48 @@
+<DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+	 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	 <style type="text/css">
+	 	 h1{
+	 color: #FCA205;
+        font-family: 'Lobster';
+        font-size:36pt;
+	 }
+	 h3{
+
+	 	font-family: 'Lobster';
+	 	font-size:40pt;
+	 }
+	 h6{
+	 	font-family: 'Lobster';
+	 	font-size:16pt;
+	 }
+	 div{
+	 	width: 300px
+	 	heigth:250px;
+	 	margin: auto;
+	 	
+	 }
+	 #us{
+
+	 	width: 300px;
+	 	height: 80px
+	 	margin: auto;
+	 }
+	 </style>
+</head>
+<body>
+
+<div id ="us">
 <h3>Registro de usuarios</h3>
 <form method="POST">
 	{% csrf_token %}
 
 	{{form.as_p}}
-
-	<input type="submit" value="Registrar"/>
+	
+	<input type="submit" value="Registrar" class="btn btn-primary" />
 </from>
+</div>
+</body>
+</html>

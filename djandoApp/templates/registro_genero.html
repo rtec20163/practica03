@@ -1,7 +1,7 @@
-
-<DOCTYPE <!DOCTYPE html>
+<!DOCTYPE <!DOCTYPE html>
 <html>
 <head>
+
 	<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 	 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	 <style type="text/css">
@@ -10,12 +10,12 @@
         font-family: 'Lobster';
         font-size:36pt;
 	 }
-	 h4{
-	 	color: #FCA205;
+	 h3{
+
 	 	font-family: 'Lobster';
-	 	font-size:26pt;
+	 	font-size:40pt;
 	 }
-	 h5{
+	 h6{
 	 	font-family: 'Lobster';
 	 	font-size:16pt;
 	 }
@@ -25,13 +25,8 @@
 	 	margin: auto;
 	 	
 	 }
-	 h2{
-	 	font-family: 'Lobster';
-	 	color: #FF0000;
-
-	 }
 	 #us{
-	 	text-align: center;
+
 	 	width: 60px;
 	 	height: 50px
 	 	margin: auto;
@@ -40,24 +35,17 @@
 </head>
 <body>
 
+<div id="us">
+<h3>Registrar genero</h3>
+<form method="POST">
+	{% csrf_token %}
 
-<a href="{% url 'djandoApp.views.consultar_grupos' %}"> --GRUPOS</a>
+	{{form.as_p}}
 
-<hr/>
-	<h4>GRUPO O ARTISTA QUE PERTENECE EL COMENTARIO</h4>
-	<h5><p>{{ public.grupo }}</p></h5>
-
-	<h4>TITULO: </h4>
-	<h5><p>{{ public.titulo }}</p></h5>
-
-	<h4>COMENTARIO: </h4>
-	<h5><p>{{ public.texto }}</p></h5>
-
-	<h4>AUTOR: </h4>	
-	<h5><p>{{ public.autor }}</p>	</h5>
-
-
-
-
+	<input type="submit" value="Registrar" class="btn btn-primary"/>
+</from>
+</div>
 </body>
 </html>
+
+

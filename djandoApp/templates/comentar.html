@@ -1,8 +1,42 @@
-<h3>Nuevo comentario</h3>
-<form method="POST">
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+	 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	 <style type="text/css">
+	 h2{
+	 color: #FCA205;
+        font-family: 'Lobster';
+        font-size:36pt;
+	 }
+	 h4{
+
+	 	font-family: 'Lobster';
+	 	font-size:22pt;
+	 }
+	 h6{
+	 	font-family: 'Lobster';
+	 	font-size:16pt;
+	 }
+	 p{
+	 	font-family: 'Lobster';
+	 	font-size:16pt;
+	 	
+	 }
+	 </style>
+
+</head>
+<body>
+<h1 style="font-family: 'Lobster';color: #FCA205;">Nuevo comentario</h1>
+
+<form method="POST" style="font-family: 'Lobster';">
 	{% csrf_token %}
 
 	{{formUNO.as_p}}
 
-	<input type="submit" value="Comentar"/>
+	<input type="submit" value="Comentar" 
+	class="btn btn-primary" />
 </from>
+
+</body>
+</html>
